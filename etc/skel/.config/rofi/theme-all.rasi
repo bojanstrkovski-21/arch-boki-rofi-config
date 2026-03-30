@@ -1,0 +1,115 @@
+/**
+ * rofi -dump-theme output.
+ * Rofi version: 2.0.0
+ **/
+* {
+    border-col:   rgba ( 127, 187, 179, 100 % );
+    col4:         rgba ( 131, 192, 146, 100 % );
+    purple:       rgba ( 221, 102, 153, 60 % );
+    col3:         rgba ( 167, 192, 128, 100 % );
+    width:        350px ;
+    bg-col-light: rgba ( 35, 42, 46, 100 % );
+    fg-col3:      rgba ( 45, 53, 59, 100 % );
+    selected-col: rgba ( 131, 192, 146, 85 % );
+    bg-col:       rgba ( 45, 53, 59, 100 % );
+    fg-col2:      rgba ( 211, 198, 170, 100 % );
+    fg-col:       rgba ( 168, 158, 136, 100 % );
+}
+window {
+    width:            350px ;
+    background-color: var(bg-col);
+    anchor:           north;
+    y-offset:         60px ;
+    border-color:     var(border-col);
+    border:           2px ;
+    border-radius:    15px ;
+}
+mainbox {
+    background-color: var(bg-col);
+}
+inputbar {
+    padding:          2px ;
+    background-color: var(bg-col);
+    margin:           0px 5px 0px 0px ;
+    children:         [ "prompt","entry" ];
+    border-radius:    10px ;
+}
+prompt {
+    padding:          10px ;
+    background-color: var(col3);
+    margin:           5px 0px 0px 5px ;
+    text-color:       var(bg-col);
+    border-radius:    10px ;
+}
+textbox-prompt-colon {
+    expand: false;
+    str:    ":";
+}
+entry {
+    padding:          10px ;
+    margin:           5px 0px 0px 5px ;
+    background-color: var(bg-col-light);
+    text-color:       var(fg-col);
+    border-radius:    10px ;
+}
+listview {
+    padding:          6px 0px 0px ;
+    margin:           10px 5px 5px ;
+    background-color: var(bg-col);
+    columns:          1;
+    lines:            8;
+    border:           0px ;
+}
+element {
+    padding:          8px ;
+    background-color: var(bg-col);
+    border-radius:    10px ;
+    text-color:       var(fg-col);
+}
+element selected {
+    background-color: var(selected-col);
+    text-color:       var(fg-col3);
+}
+element selected.normal {
+    bacground-color: var(selected-col);
+}
+element selected.alternate.normal {
+    bacground-color: var(selected-col);
+}
+element selected.alternate.active {
+    bacground-color: var(selected-col);
+}
+element selected.active {
+    bacground-color: var(selected-col);
+}
+element-icon {
+    padding:          0px 10px 0px 0px ;
+    size:             32px ;
+    background-color: var(bg-col);
+}
+element-icon selected {
+    background-color: var(selected-col);
+}
+element-text {
+    background-color: var(bg-col);
+    vertical-align:   0.50;
+    text-color:       var(fg-col);
+}
+element-text selected {
+    background-color: var(selected-col);
+    text-color:       var(fg-col3);
+}
+mode-switcher {
+    spacing: 0;
+}
+button {
+    padding:          10px ;
+    background-color: var(bg-col-light);
+    vertical-align:   0.50;
+    horizontal-align: 0.50;
+    text-color:       var(fg-col);
+}
+button selected {
+    background-color: var(selected-col);
+    text-color:       var(fg-col2);
+}

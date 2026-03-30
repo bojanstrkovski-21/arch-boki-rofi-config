@@ -4,9 +4,10 @@
 
 configuration {
     modi: "drun,run,filebrowser,window";
-    font: "MesloLGS Nerd Font 12";
+    font: "JetBrainsMono Nerd Font 12";
     terminal: "kitty";
     drun-display-format: "{icon} {name}";
+    location: 0;
     disable-history: false;
     hide-scrollbar: true;
     display-drun: " Apps";
@@ -33,11 +34,6 @@ configuration {
     // Enable icons
     show-icons: true;
     icon-theme: "Papirus";
-
-    border: none;
-    location: 2;
 }
 
-//@theme "catppuccin"
-@theme "everforest"
-
+@theme "catppuccin"
