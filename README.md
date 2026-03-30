@@ -1,1 +1,1 @@
-# arch-boki-rofi-config
+# Arch-boki-rofi-config
