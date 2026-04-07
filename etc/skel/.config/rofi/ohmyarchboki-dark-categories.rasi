@@ -1,0 +1,226 @@
+/**
+ * everforast-categories.rasi
+ * Rofi theme — category mode-switcher, ohmychadwm visual style
+ **/
+
+/* ── Colour tokens ─────────────────────────────────────────────────────── */
+* {
+    bg:      #101010A9;   /* main window — semi-transparent near-black        */
+    bg-alt:  #000000CC;   /* entry bar / buttons — slightly more opaque       */
+    bg-item: #1e1e1eCC;   /* normal row background — visibly lighter than bg  */
+    bg-sel:  rgba(255, 255, 255, 0.10);   /* selected/focused row — semi-transparent white tint */
+    al:      #00000000;                   /* fully transparent                                  */
+
+    fg:     #eeeeee;     /* primary text                                      */
+    fg-dim: #888888;     /* placeholder / dim text                            */
+
+    ac:     #a3a3a3;     /* selected item text accent                         */
+    sa:     rgba(255, 255, 255, 0.07);   /* prompt/entry/selected bg — subtle frosted tint     */
+
+    background-color: @al;
+    text-color:       @fg;
+    border-color:     @al;
+}
+
+configuration {
+    me-select-entry:            "MousePrimary";
+    me-accept-entry:            "!MousePrimary";
+    cursor:                     pointer;
+    hover-select:               true;
+    kb-custom-1: "Alt+1";
+    kb-custom-2: "Alt+2";
+    kb-custom-3: "Alt+3";
+    kb-custom-4: "Alt+4";
+    kb-custom-5: "Alt+5";
+    kb-custom-6: "Alt+6";
+    kb-custom-7: "Alt+7";
+    kb-custom-8: "Alt+8";
+}
+
+element {
+    padding:          8px;
+    cursor:           pointer;
+    border:           0;
+    border-radius:    10px;
+    text-color:       @ac;
+    background-color: @al;
+    orientation:      vertical;
+    children:         [ element-icon, element-text ];
+    highlight:        bold;
+}
+element normal.normal {
+    background-color: @al;
+    text-color:       @ac;
+}
+element normal.urgent {
+    background-color: @al;
+    text-color:       @ac;
+}
+element normal.active {
+    background-color: @al;
+    text-color:       @ac;
+}
+element selected.normal {
+    background-color: @bg-sel;
+    text-color:       @ac;
+}
+element selected.urgent {
+    background-color: @bg-sel;
+    text-color:       @fg;
+}
+element selected.active {
+    background-color: @bg-sel;
+    text-color:       @ac;
+}
+element alternate.normal {
+    background-color: @al;
+    text-color:       @ac;
+}
+element alternate.urgent {
+    background-color: @al;
+    text-color:       @ac;
+}
+element alternate.active {
+    background-color: @al;
+    text-color:       @ac;
+}
+element-icon {
+    background-color: @al;
+    cursor:           inherit;
+    text-color:       inherit;
+    size:             32px;
+    horizontal-align: 0.5;
+    padding:          0;
+    margin:           0;
+}
+
+element-text {
+    background-color: @al;
+    cursor:           inherit;
+    text-color:       inherit;
+    horizontal-align: 0.5;
+    vertical-align:   0.5;
+    font:             "Inter Display Medium 12";
+}
+
+element.alternate.selected,
+element-icon.selected,
+element-icon.selected.active,
+element-text.selected,
+element-text.selected.active {
+    padding: 0;
+    margin:  0;
+}
+
+window {
+    padding:          5;
+    background-color: @bg;
+    border:           0;
+    anchor:           north;
+    y-offset:         70px;
+    width:            1400px;
+    border-radius:    15px;
+    children:         [ mainbox ];
+}
+
+mainbox {
+    background-color: @bg;
+    children:         [ inputbar, listview, mode-switcher ];
+}
+
+message {
+    padding:      1px;
+    border-color: @sa;
+    border:       2px solid 0px 0px;
+}
+
+textbox {
+    text-color: @fg;
+}
+listview {
+    padding:       7px 0px 0px 0px;
+    scrollbar:     true;
+    border-color:  @sa;
+    spacing:       2px;
+    fixed-height:  0;
+    fixed-columns: true;
+    border:        2px solid 0px 0px;
+    columns:       6;
+    lines:         8;
+}
+
+scrollbar {
+    width:        4px;
+    padding:      0;
+    handle-width: 8px;
+    border:       0;
+    handle-color: @fg;
+}
+
+/* Mode switcher (category buttons) */
+mode-switcher {
+    border:       2px solid 0px 0px;
+    border-color: @sa;
+    padding:      5px;
+    spacing:      5px;
+}
+
+sidebar {
+    border-color: @sa;
+    border:       2px solid 0px 0px;
+}
+
+button {
+    cursor:           pointer;
+    spacing:          0;
+    text-color:       @ac;
+    background-color: @bg-alt;
+    padding:          8px;
+    border-radius:    8px;
+}
+
+button selected {
+    background-color: @sa;
+    text-color:       @ac;
+}
+
+num-filtered-rows {
+    expand:     false;
+    text-color: @fg-dim;
+}
+
+num-rows {
+    expand:     false;
+    text-color: @fg-dim;
+}
+
+textbox-num-sep {
+    expand:     false;
+    str:        "/";
+    text-color: @fg-dim;
+}
+inputbar {
+    padding:          2px;
+    margin:           0px 5px 0px 0px;
+    border-radius:    10px;
+    text-color:       @fg;
+    background-color: @al;
+    children:         [ "prompt", "entry" ];
+}
+
+entry {
+    text-color:       @ac;
+    background-color: @sa;
+    cursor:           text;
+    padding:          10px;
+    margin:           5px 3px 3px 0.5px;
+    border-radius:    10px;
+}
+
+prompt {
+    text-color:       @ac;
+    background-color: @sa;
+    padding:          10px;
+    margin:           5px 3px 3px 0.5px;
+    border-radius:    10px;
+}
