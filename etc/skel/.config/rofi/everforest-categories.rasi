@@ -50,6 +50,14 @@ configuration {
     me-accept-entry:            "!MousePrimary";
     cursor:                     pointer;
     hover-select:               true;
+    kb-custom-1: "Alt+1";
+    kb-custom-2: "Alt+2";
+    kb-custom-3: "Alt+3";
+    kb-custom-4: "Alt+4";
+    kb-custom-5: "Alt+5";
+    kb-custom-6: "Alt+6";
+    kb-custom-7: "Alt+7";
+    kb-custom-8: "Alt+8";
 }
 
 element {
@@ -59,6 +67,8 @@ element {
     border-radius: 10px;
     text-color: var(foreground);
     background-color: var(background);
+    orientation: vertical;
+    children: [ element-icon, element-text ];
     highlight: bold;
 }
 element normal.normal {
@@ -76,9 +86,6 @@ element normal.active {
 element selected.normal {
     background-color: var(selected-normal-background);
     text-color:       var(dark-blue);
-    width: 335px;
-    margin: 3px 0px 0px 15px;
-    padding: 0;
 }
 
 element selected.urgent {
@@ -88,8 +95,6 @@ element selected.urgent {
 element selected.active {
     background-color: var(selected-active-background);
     text-color:       var(dark-blue);
-    margin: 3px 0px 0px 15px;
-    padding: 0;
 }
 element alternate.normal {
     background-color: var(alternate-normal-background);
@@ -103,19 +108,25 @@ element alternate.active {
     background-color: var(alternate-active-background);
     text-color:       var(alternate-active-foreground);
 }
+element-icon {
+    background-color: transparent;
+    cursor:           inherit;
+    text-color:       var(foreground);
+    text-color:       inherit;
+    size:             32px;
+    horizontal-align: 0.5;
+    padding: 0;
+    margin: 0;
+}
+
 element-text {
     background-color: transparent;
     cursor:           inherit;
     text-color:       var(foreground);
     text-color:       inherit;
+    horizontal-align: 0.5;
     vertical-align:   0.5;
-}
-element-icon {
-    background-color: transparent;
-    cursor:           inherit;
-    text-color:       inherit;
-    padding: 0;
-    margin: 0;
+    font:             "Inter Display Medium 12";
 }
 
 element.alternate.selected,
@@ -132,8 +143,8 @@ window {
     background-color: var(background);
     border:           1;
     anchor: north;
-    y-offset: 60px;
-    width: 600px;
+    y-offset: 70px;
+    width: 1400px;
     border-color: var(m-blue);
     border-radius: 15px;
     children:         [ mainbox ];
@@ -151,12 +162,15 @@ textbox {
     text-color: var(foreground);
 }
 listview {
-    padding:      7px 0px 0px 0px;
-    scrollbar:    true;
-    border-color: var(separatorcolor);
-    spacing:      2px ;
-    fixed-height: 0;
-    border:       2px dash 0px 0px ;
+    padding:       7px 0px 0px 0px;
+    scrollbar:     true;
+    border-color:  var(separatorcolor);
+    spacing:       2px;
+    fixed-height:  0;
+    fixed-columns: true;
+    border:        2px dash 0px 0px;
+    columns:       6;
+    lines:         8;
 }
 scrollbar {
     width:        4px ;
@@ -173,6 +187,11 @@ mode-switcher {
     padding:      5px;
     spacing:      5px;
 }
+
+sidebar {
+    border-color: var(separatorcolor);
+    border:       2px dash 0px 0px ;
+}
 button {
     cursor:          pointer;
     spacing:         0;
@@ -184,11 +203,6 @@ button {
 button selected {
     background-color: var(selected-normal-background);
     text-color:       var(dark-blue);
-}
-
-sidebar {
-    border-color: var(separatorcolor);
-    border:       2px dash 0px 0px ;
 }
 num-filtered-rows {
     expand:     false;

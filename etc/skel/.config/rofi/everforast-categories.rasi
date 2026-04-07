@@ -1,6 +1,7 @@
 /**
  * rofi -dump-theme output.
  * Rofi version: 2.0.0
+ * With category mode-switcher enabled
  **/
 * {
    
@@ -85,9 +86,6 @@ element normal.active {
 element selected.normal {
     background-color: var(selected-normal-background);
     text-color:       var(dark-blue);
-    width: 335px;
-    margin: 3px 0px 0px 15px;
-    padding: 0;
 }
 
 element selected.urgent {
@@ -97,8 +95,6 @@ element selected.urgent {
 element selected.active {
     background-color: var(selected-active-background);
     text-color:       var(dark-blue);
-    margin: 3px 0px 0px 15px;
-    padding: 0;
 }
 element alternate.normal {
     background-color: var(alternate-normal-background);
@@ -166,14 +162,15 @@ textbox {
     text-color: var(foreground);
 }
 listview {
-    padding:      7px 0px 0px 0px;
-    scrollbar:    true;
-    border-color: var(separatorcolor);
-    spacing:      2px ;
-    fixed-height: 0;
-    border:       2px dash 0px 0px ;
-    columns:      6;
-    lines:        8;
+    padding:       7px 0px 0px 0px;
+    scrollbar:     true;
+    border-color:  var(separatorcolor);
+    spacing:       2px;
+    fixed-height:  0;
+    fixed-columns: true;
+    border:        2px dash 0px 0px;
+    columns:       6;
+    lines:         8;
 }
 scrollbar {
     width:        4px ;
