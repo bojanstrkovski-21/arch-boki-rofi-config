@@ -7,4 +7,4 @@
 
 # rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/launcher/rofi/launcher.rasi
 
-rofi -show Apps -modi Apps,Accessories,Development,Graphics,Multimedia,Office,System,Settings,Internet -i -theme ~/.config/rofi/everforast-categories.rasi
+rofi -show Apps -modi Apps,Accessories,Development,Graphics,Multimedia,Office,System,Settings,Internet -i -theme ~/.config/rofi/ohmyarchboki-everforest-categories.rasi

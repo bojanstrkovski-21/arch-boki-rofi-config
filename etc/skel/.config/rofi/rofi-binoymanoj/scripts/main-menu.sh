@@ -558,7 +558,7 @@ show_bookmarks() {
 
 # Books menu
 show_books() {
-    PDFS=$(find ~/CyberSec/Books ~/Documents/Books ~/Development/Books -mindepth 1 -maxdepth 1 -name "*.pdf" 2>/dev/null)
+    PDFS=$(find ~/CyberSec/Books ~/Documents/Books ~/Development/Books ~/Templates/e-books/ -mindepth 1 -maxdepth 6 -name "*.pdf" 2>/dev/null)
     
     if [ -z "$PDFS" ]; then
         notify-send "Books" "No PDF files found in book directories"

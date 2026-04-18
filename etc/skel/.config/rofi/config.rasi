@@ -39,5 +39,5 @@ configuration {
 }
 
 //@theme "catppuccin"
-@theme "everforest"
-
+//@theme "everforest"
+@theme "ohmyarchboki-everforest-center"

@@ -1,0 +1,215 @@
+/**
+ * rofi -dump-theme output.
+ * Rofi version: 2.0.0
+ * Colors sourced from ohmyarchboki-everforest-categories.rasi
+ **/
+* {
+   
+    active-background:           var(background);
+    active-foreground:           var(blue);
+    alternate-active-background: var(background);
+    alternate-active-foreground: var(foreground);
+    alternate-normal-background: var(background);
+    alternate-normal-foreground: var(foreground);
+    alternate-urgent-background: var(lightbg);
+    alternate-urgent-foreground: var(red);
+    aqua:                        #a3a3a3;
+    background-color:            transparent;
+    background:                  #2d353bCC;
+    background2:                 #232a2eCC;
+    blue:                        #a3a3a3;
+    m-blue:                      #a3a3a380;
+    dark-blue:                   #0d1012;
+    border-color:                var(blue);
+    foreground:                  #d3c6aa;
+    foreground2:                 #88888830;
+    green:                       #a3a3a3;
+    lightbg:                     rgba ( 211, 198, 170, 100 % );
+    lightbg2:                    #a3a3a34d;
+    lightfg:                     rgba ( 136, 136, 136, 100 % );
+    normal-background:           var(background);
+    normal-foreground:           var(foreground);
+    red:                         #888888;
+    selected-active-background:  var(lightbg2);
+    selected-active-foreground:  var(background);
+    selected-normal-background:  var(lightbg2);
+    selected-normal-foreground:  var(background);
+    selected-urgent-background:  var(red);
+    selected-urgent-foreground:  var(background);
+    separatorcolor:              var(foreground);
+    spacing:                     2;
+    urgent-background:           var(background);
+    urgent-foreground:           var(red);
+    lines: 14;
+    font: "MesloLGS Nerd Font Bold 12";
+    font-weight: 900;
+}
+
+configuration {
+    me-select-entry:            "MousePrimary";
+    me-accept-entry:            "!MousePrimary";
+    cursor:                     pointer;
+    hover-select:               true;
+}
+
+element {
+    padding: 8px ;
+    cursor:  pointer;
+    border:  0;
+    border-radius: 10px;
+    text-color: var(foreground);
+    background-color: var(background);
+    highlight: bold;
+}
+element normal.normal {
+    background-color: var(normal-background);
+    text-color:       var(normal-foreground);
+}
+element normal.urgent {
+    background-color: var(urgent-background);
+    text-color:       var(urgent-foreground);
+}
+element normal.active {
+    background-color: var(active-background);
+    text-color:       var(active-foreground);
+}
+element selected.normal {
+    background-color: var(selected-normal-background);
+    text-color:       var(dark-blue);
+    width: 335px;
+    margin: 3px 0px 0px 15px;
+    padding: 0;
+}
+
+element selected.urgent {
+    background-color: var(selected-urgent-background);
+    text-color:       var(selected-urgent-foreground);
+}
+element selected.active {
+    background-color: var(selected-active-background);
+    text-color:       var(dark-blue);
+    margin: 3px 0px 0px 15px;
+    padding: 0;
+}
+element alternate.normal {
+    background-color: var(alternate-normal-background);
+    text-color:       var(foreground);
+}
+element alternate.urgent {
+    background-color: var(alternate-urgent-background);
+    text-color:       var(alternate-urgent-foreground);
+}
+element alternate.active {
+    background-color: var(alternate-active-background);
+    text-color:       var(alternate-active-foreground);
+}
+element-text {
+    background-color: transparent;
+    cursor:           inherit;
+    text-color:       var(foreground);
+    text-color:       inherit;
+    vertical-align:   0.5;
+}
+element-icon {
+    background-color: transparent;
+    cursor:           inherit;
+    text-color:       inherit;
+    padding: 0;
+    margin: 0;
+}
+
+element.alternate.selected,
+element-icon.selected, 
+element-icon.selected.active,
+element-text.selected,
+element-text.selected.active {
+    padding: 0;
+    margin: 0;
+}
+
+window {
+    padding:          5;
+    background-color: var(background);
+    border:           1;
+    anchor: north;
+    y-offset: 60px;
+    width: 350px;
+    border-color: var(m-blue);
+    border-radius: 15px;
+}
+mainbox {
+    background-color: var(background);
+}
+message {
+    padding:      1px ;
+    border-color: var(separatorcolor);
+    border:       2px dash 0px 0px ;
+}
+textbox {
+    text-color: var(foreground);
+}
+listview {
+    padding:      7px 0px 0px 0px;
+    scrollbar:    true;
+    border-color: var(separatorcolor);
+    spacing:      2px ;
+    fixed-height: 0;
+    border:       2px dash 0px 0px ;
+}
+scrollbar {
+    width:        4px ;
+    padding:      0;
+    handle-width: 8px ;
+    border:       0;
+    handle-color: var(normal-foreground);
+}
+sidebar {
+    border-color: var(separatorcolor);
+    border:       2px dash 0px 0px ;
+}
+button {
+    cursor:     pointer;
+    spacing:    0;
+    text-color: var(normal-foreground);
+}
+button selected {
+    background-color: var(selected-normal-background);
+    text-color:       var(selected-normal-foreground);
+}
+num-filtered-rows {
+    expand:     false;
+    text-color: Gray;
+}
+num-rows {
+    expand:     false;
+    text-color: Gray;
+}
+textbox-num-sep {
+    expand:     false;
+    str:        "/";
+    text-color: Gray;
+}
+inputbar {
+    padding:    2px ;
+    margin:    0px 5px 0px 0px;
+    border-radius: 10px;
+    text-color: var(normal-foreground);
+    children:   [ "prompt","entry" ];
+}
+
+entry {
+    text-color:        var(foreground);
+    background-color: var(foreground2);
+    cursor:            text;
+    padding:           10px;
+    margin: 5px 0px 3px 5px;
+    border-radius: 10px;
+}
+prompt {
+    
+    text-color: var(dark-blue);
+    background-color: var(lightbg2);
+    padding: 10px;
+    margin: 5px 3px 3px 0.5px;
+    border-radius: 10px;
+}

@@ -41,7 +41,7 @@
     urgent-foreground:           var(red);
     font: "MesloLGS Nerd Font Bold 12";
     font-weight: 900;
-    lines: 8;
+    lines: 14;
 }
 
 configuration {
@@ -129,9 +129,9 @@ element-text.selected.active {
 window {
     padding:          5;
     background-color: var(background);
-    border:           1;
+    border:           0;
     border-color: var(m-blue);
-    border-radius: 15px;
+    border-radius: 0;
     width: 400px;
     location: center;
 }

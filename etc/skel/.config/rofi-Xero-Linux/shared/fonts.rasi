@@ -1,0 +1,12 @@
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * 
+ * Fonts
+ *Ubuntu Nerd Font
+ **/
+
+* {
+    font: " MesloLGS Nerd Font Mono 11.23";
+}

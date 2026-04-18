@@ -1,0 +1,20 @@
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * Adapted to everforest medium dark color style
+ * 
+ * Colors
+ **/
+
+* {                      
+    background:     rgba(35, 42, 46, 0.95);       /* dark gray-blue */
+    background-alt: rgba(45, 53, 59, 1);       /* lighter gray-blue for contrast */
+    foreground:     #D3C6AA;       /* soft light gray */
+    selected:       #7FBBB3;       /* light blue (accent) */
+    grayblue:       #1a262d;       /* dark grayblue (accent) */
+    green:          #5b7662;       /* grayish green style */
+    cyan:           #83c092;
+    active:         #D699B6;       /* more saturated purple */
+    urgent:         #E67E80;       /* soft red for urgency */
+}

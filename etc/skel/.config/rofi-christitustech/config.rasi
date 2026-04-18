@@ -1,0 +1,15 @@
+/** Basic config file **/
+
+configuration {
+  show-icons: true;
+  icon-theme: "Papirus";
+  display-drun: "  ";
+  display-window: "﩯 ";
+  display-combi: "  ";
+  me-select-entry:            "MousePrimary";
+  me-accept-entry:            "!MousePrimary";
+  cursor:                     pointer;
+  hover-select:               true;
+  font: "MesloLGS Nerd Font Bold 12";
+}
+@theme "themes/sidetab-nord.rasi"
