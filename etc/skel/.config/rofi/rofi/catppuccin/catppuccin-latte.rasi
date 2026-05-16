@@ -1,0 +1,211 @@
+/**
+ * catppuccin-latte.rasi — Catppuccin Latte, everforest-center layout
+ **/
+* {
+    rosewater:   #dc8a78;  flamingo:  #dd7878;  pink:      #ea76cb;
+    mauve:       #8839ef;  red:       #d20f39;  maroon:    #e64553;
+    peach:       #fe640b;  yellow:    #df8e1d;  green:     #40a02b;
+    teal:        #179299;  sky:       #04a5e5;  sapphire:  #209fb5;
+    blue:        #1e66f5;  lavender:  #7287fd;  text:      #4c4f69;
+    subtext1:    #5c5f77;  subtext0:  #6c6f85;  overlay2:  #7c7f93;
+    overlay1:    #8c8fa1;  overlay0:  #9ca0b0;  surface2:  #acb0be;
+    surface1:    #bcc0cc;  surface0:  #ccd0da;  base:      #eff1f5;
+    mantle:      #e6e9ef;  crust:     #dce0e8;
+
+    background-color:            transparent;
+    background:                  #acb0be;
+    background2:                 #e6e9ef;
+    foreground:                  #4c4f69;
+    foreground2:                 #9ca0b030;
+    m-blue:                      #1e66f580;
+    dark-blue:                   #dce0e8;
+    lightbg:                     #bcc0cc;
+    lightbg2:                    #8839ef;
+    lightfg:                     #8c8fa180;
+    active-background:           var(background);
+    active-foreground:           var(blue);
+    alternate-active-background: var(background);
+    alternate-active-foreground: var(foreground);
+    alternate-normal-background: var(background);
+    alternate-normal-foreground: var(foreground);
+    alternate-urgent-background: var(lightbg);
+    alternate-urgent-foreground: var(red);
+    border-color:                var(blue);
+    normal-background:           var(background);
+    normal-foreground:           var(foreground);
+    selected-active-background:  var(lightbg2);
+    selected-active-foreground:  var(background);
+    selected-normal-background:  var(lightbg2);
+    selected-normal-foreground:  var(background);
+    selected-urgent-background:  var(red);
+    selected-urgent-foreground:  var(background);
+    separatorcolor:              var(foreground);
+    urgent-background:           var(background);
+    urgent-foreground:           var(red);
+    spacing:                     2;
+    font:                        "MesloLGS Nerd Font Bold 12";
+    font-weight:                 900;
+    lines:                       14;
+}
+configuration {
+    me-select-entry:            "MousePrimary";
+    me-accept-entry:            "!MousePrimary";
+    cursor:                     pointer;
+    hover-select:               true;
+}
+
+element {
+    padding: 8px;
+    cursor:  pointer;
+    border:  0;
+    border-radius: 10px;
+    text-color: var(foreground);
+    background-color: var(background);
+    highlight: bold;
+}
+element normal.normal {
+    background-color: var(normal-background);
+    text-color:       var(normal-foreground);
+}
+element normal.urgent {
+    background-color: var(urgent-background);
+    text-color:       var(urgent-foreground);
+}
+element normal.active {
+    background-color: var(active-background);
+    text-color:       var(active-foreground);
+}
+element selected.normal {
+    background-color: var(selected-normal-background);
+    text-color:       var(dark-blue);
+    width: 335px;
+    margin: 3px 0px 0px 15px;
+    padding: 0;
+}
+element selected.urgent {
+    background-color: var(selected-urgent-background);
+    text-color:       var(selected-urgent-foreground);
+}
+element selected.active {
+    background-color: var(selected-active-background);
+    text-color:       var(dark-blue);
+    margin: 3px 0px 0px 15px;
+    padding: 0;
+}
+element alternate.normal {
+    background-color: var(alternate-normal-background);
+    text-color:       var(foreground);
+}
+element alternate.urgent {
+    background-color: var(alternate-urgent-background);
+    text-color:       var(alternate-urgent-foreground);
+}
+element alternate.active {
+    background-color: var(alternate-active-background);
+    text-color:       var(alternate-active-foreground);
+}
+element-text {
+    background-color: transparent;
+    cursor:           inherit;
+    text-color:       inherit;
+    vertical-align:   0.5;
+}
+element-icon {
+    background-color: transparent;
+    cursor:           inherit;
+    text-color:       inherit;
+    padding: 0;
+    margin: 0;
+}
+element.alternate.selected,
+element-icon.selected,
+element-icon.selected.active,
+element-text.selected,
+element-text.selected.active {
+    padding: 0;
+    margin:  0;
+}
+
+window {
+    padding:          5;
+    background-color: var(background);
+    border:           0;
+    border-color:     var(m-blue);
+    border-radius:    0;
+    width:            400px;
+    location:         center;
+}
+mainbox {
+    background-color: var(background);
+}
+message {
+    padding:      1px;
+    border-color: var(separatorcolor);
+    border:       2px dash 0px 0px;
+}
+textbox {
+    text-color: var(foreground);
+}
+listview {
+    padding:      7px 0px 0px 0px;
+    scrollbar:    true;
+    border-color: var(separatorcolor);
+    spacing:      2px;
+    fixed-height: 0;
+    border:       2px dash 0px 0px;
+}
+scrollbar {
+    width:        4px;
+    padding:      0;
+    handle-width: 8px;
+    border:       0;
+    handle-color: var(normal-foreground);
+}
+sidebar {
+    border-color: var(separatorcolor);
+    border:       2px dash 0px 0px;
+}
+button {
+    cursor:     pointer;
+    spacing:    0;
+    text-color: var(normal-foreground);
+}
+button selected {
+    background-color: var(selected-normal-background);
+    text-color:       var(selected-normal-foreground);
+}
+num-filtered-rows {
+    expand:     false;
+    text-color: Gray;
+}
+num-rows {
+    expand:     false;
+    text-color: Gray;
+}
+textbox-num-sep {
+    expand:     false;
+    str:        "/";
+    text-color: Gray;
+}
+inputbar {
+    padding:      2px;
+    margin:       0px 5px 0px 0px;
+    border-radius: 10px;
+    text-color:   var(normal-foreground);
+    children:     [ "prompt", "entry" ];
+}
+entry {
+    text-color:       var(foreground);
+    background-color: var(foreground2);
+    cursor:           text;
+    padding:          10px;
+    margin:           5px 0px 3px 5px;
+    border-radius:    10px;
+}
+prompt {
+    text-color:       var(dark-blue);
+    background-color: var(lightbg2);
+    padding:          10px;
+    margin:           5px 3px 3px 0.5px;
+    border-radius:    10px;
+}

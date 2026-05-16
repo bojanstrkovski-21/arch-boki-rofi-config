@@ -36,4 +36,4 @@ configuration {
     icon-theme: "Papirus";
 }
 
-@theme "catppuccin"
+@theme "themes/catppuccin"

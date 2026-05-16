@@ -887,7 +887,7 @@ show_system() {
 }
 
 # Main logic
-CHOICE=$(show_main_menu | rofi -dmenu -i -p "Arch-Boki-Menu")
+CHOICE=$(show_main_menu | rofi -dmenu -i -p "Arch-Boki-Menu" -theme ~/.config/rofi/rofi/everforest-ohmyarchboki-everforest.rasi)
 case "$CHOICE" in
     *"TUI Apps")
         show_tui

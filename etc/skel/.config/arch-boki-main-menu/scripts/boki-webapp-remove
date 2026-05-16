@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+# =============================================================================
+# boki-webapp-remove — remove an installed web app desktop entry
+# =============================================================================
+
+BOKI_USER="$(whoami)"
+BOKI_HOME="/home/${BOKI_USER}"
+APPS_DIR="${BOKI_HOME}/.local/share/applications"
+ICONS_DIR="${APPS_DIR}/icons"
+
+echo
+printf '  \e[1m%s\e[0m\n\n' 'arch-boki — Remove Web App'
+
+# Find all .desktop files that use --app= (our webapp marker)
+mapfile -t WEBAPPS < <(grep -rl -- '--app=' "$APPS_DIR" 2>/dev/null | grep '\.desktop$')
+
+if [[ ${#WEBAPPS[@]} -eq 0 ]]; then
+    echo "  No web apps found to remove."
+    echo
+    printf '  Press any key to close...'
+    read -n1 -s
+    exit 0
+fi
+
+# Build display list (show app Name from desktop file)
+declare -A NAME_TO_FILE
+OPTIONS=""
+for f in "${WEBAPPS[@]}"; do
+    name=$(grep -oP '^Name=\K.*' "$f" | head -1)
+    [[ -z "$name" ]] && name="$(basename "$f" .desktop)"
+    NAME_TO_FILE["$name"]="$f"
+    OPTIONS+="${name}\n"
+done
+OPTIONS="${OPTIONS%\\n}"
+
+# Let user pick with fzf
+echo "  Select web app to remove:"
+echo
+CHOSEN=$(echo -e "$OPTIONS" | fzf --prompt="Remove > " --layout=reverse --border 2>/dev/null)
+
+if [[ -z "$CHOSEN" ]]; then
+    echo "  Cancelled."
+    echo
+    printf '  Press any key to close...'
+    read -n1 -s
+    exit 0
+fi
+
+DESKTOP_FILE="${NAME_TO_FILE[$CHOSEN]}"
+
+# Confirm
+echo
+read -rp "  Remove '${CHOSEN}'? [y/N] " confirm
+if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+    echo "  Cancelled."
+    echo
+    printf '  Press any key to close...'
+    read -n1 -s
+    exit 0
+fi
+
+# Remove icon if it lives in our icons dir
+ICON=$(grep -oP '^Icon=\K.*' "$DESKTOP_FILE" | head -1)
+if [[ "$ICON" == "${ICONS_DIR}"* && -f "$ICON" ]]; then
+    rm -f "$ICON"
+fi
+
+rm -f "$DESKTOP_FILE"
+update-desktop-database "$APPS_DIR" 2>/dev/null || true
+
+echo
+echo "  ✓ Web app '${CHOSEN}' removed."
+echo
+printf '  Press any key to close...'
+read -n1 -s

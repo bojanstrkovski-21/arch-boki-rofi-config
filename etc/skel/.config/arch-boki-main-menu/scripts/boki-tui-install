@@ -1,0 +1,191 @@
+#!/usr/bin/env bash
+# =============================================================================
+# boki-tui-install — install a TUI app and register it as a desktop entry
+# so it appears in rofi drun and launches in a terminal
+# =============================================================================
+
+BOKI_USER="$(whoami)"
+BOKI_HOME="/home/${BOKI_USER}"
+APPS_DIR="${BOKI_HOME}/.local/share/applications"
+mkdir -p "$APPS_DIR"
+
+TERMINAL="${TERMINAL:-alacritty}"
+
+# ---------------------------------------------------------------------------
+# TUI catalogue — format: "Display Name|package|exec-command|description"
+# ---------------------------------------------------------------------------
+declare -A TUI_PKG TUI_CMD TUI_DESC
+TUIS=(
+    "btop"
+    "ncdu"
+    "ranger"
+    "yazi"
+    "lazygit"
+    "cava"
+    "fastfetch"
+    "nvtop"
+    "htop"
+    "bpytop"
+    "dust"
+    "gdu"
+    "lazydocker"
+    "bottom"
+    "neomutt"
+    "newsboat"
+    "calcurse"
+    "vifm"
+    "lf"
+    "micro"
+)
+
+TUI_PKG=(
+    [btop]="btop"
+    [ncdu]="ncdu"
+    [ranger]="ranger"
+    [yazi]="yazi"
+    [lazygit]="lazygit"
+    [cava]="cava"
+    [fastfetch]="fastfetch"
+    [nvtop]="nvtop"
+    [htop]="htop"
+    [bpytop]="bpytop"
+    [dust]="dust"
+    [gdu]="gdu"
+    [lazydocker]="lazydocker"
+    [bottom]="bottom"
+    [neomutt]="neomutt"
+    [newsboat]="newsboat"
+    [calcurse]="calcurse"
+    [vifm]="vifm"
+    [lf]="lf"
+    [micro]="micro"
+)
+
+TUI_CMD=(
+    [btop]="btop"
+    [ncdu]="ncdu"
+    [ranger]="ranger"
+    [yazi]="yazi"
+    [lazygit]="lazygit"
+    [cava]="cava"
+    [fastfetch]="fastfetch"
+    [nvtop]="nvtop"
+    [htop]="htop"
+    [bpytop]="bpytop"
+    [dust]="dust"
+    [gdu]="gdu"
+    [lazydocker]="lazydocker"
+    [bottom]="btm"
+    [neomutt]="neomutt"
+    [newsboat]="newsboat"
+    [calcurse]="calcurse"
+    [vifm]="vifm"
+    [lf]="lf"
+    [micro]="micro"
+)
+
+TUI_DESC=(
+    [btop]="System resource monitor"
+    [ncdu]="Disk usage analyzer"
+    [ranger]="File manager"
+    [yazi]="Blazing fast file manager"
+    [lazygit]="Git TUI client"
+    [cava]="Audio visualizer"
+    [fastfetch]="System info display"
+    [nvtop]="GPU process monitor"
+    [htop]="Interactive process viewer"
+    [bpytop]="Python resource monitor"
+    [dust]="Disk usage with visual tree"
+    [gdu]="Fast disk usage analyzer"
+    [lazydocker]="Docker TUI client"
+    [bottom]="System monitor (btm)"
+    [neomutt]="Email client"
+    [newsboat]="RSS/Atom feed reader"
+    [calcurse]="Calendar and todo"
+    [vifm]="Vi-style file manager"
+    [lf]="Terminal file manager"
+    [micro]="Terminal text editor"
+)
+
+# ---------------------------------------------------------------------------
+# Build fzf list — mark already installed
+# ---------------------------------------------------------------------------
+echo
+printf '  \e[1m%s\e[0m\n\n' 'arch-boki — Install TUI'
+
+LIST=""
+for tui in "${TUIS[@]}"; do
+    if command -v "${TUI_CMD[$tui]}" &>/dev/null; then
+        LIST+="[installed] ${tui} — ${TUI_DESC[$tui]}\n"
+    else
+        LIST+="            ${tui} — ${TUI_DESC[$tui]}\n"
+    fi
+done
+
+CHOSEN=$(echo -e "$LIST" | fzf \
+    --prompt="Install TUI > " \
+    --layout=reverse \
+    --border \
+    --ansi \
+    --with-nth=1 \
+    2>/dev/null | awk '{print $NF}' | cut -d'—' -f1 | xargs)
+
+# Extract just the tui name (first word after stripping [installed])
+CHOSEN=$(echo -e "$LIST" | fzf \
+    --prompt="Install TUI > " \
+    --layout=reverse \
+    --border \
+    2>/dev/null)
+
+[[ -z "$CHOSEN" ]] && { echo "  Cancelled."; exit 0; }
+
+# Parse tui name from chosen line
+TUI_NAME=$(echo "$CHOSEN" | sed 's/\[installed\]//' | awk '{print $1}')
+
+if [[ -z "${TUI_PKG[$TUI_NAME]:-}" ]]; then
+    echo "  Unknown TUI: ${TUI_NAME}"
+    exit 1
+fi
+
+# Install if not present
+if ! command -v "${TUI_CMD[$TUI_NAME]}" &>/dev/null; then
+    echo "  Installing ${TUI_NAME}..."
+    if ! sudo pacman -S --needed --noconfirm "${TUI_PKG[$TUI_NAME]}"; then
+        # Try AUR
+        for aur in yay paru; do
+            if command -v "$aur" &>/dev/null; then
+                "$aur" -S --noconfirm "${TUI_PKG[$TUI_NAME]}" && break
+            fi
+        done
+    fi
+else
+    echo "  ${TUI_NAME} is already installed."
+fi
+
+# Create .desktop entry so it appears in rofi
+APP_ID="org.boki.tui.${TUI_NAME}"
+DESKTOP_FILE="${APPS_DIR}/${APP_ID}.desktop"
+
+cat > "$DESKTOP_FILE" <<EOF
+[Desktop Entry]
+Version=1.0
+Name=${TUI_NAME}
+Comment=${TUI_DESC[$TUI_NAME]}
+Exec=${TERMINAL} --class ${APP_ID} -e ${TUI_CMD[$TUI_NAME]}
+Terminal=false
+Type=Application
+Icon=utilities-terminal
+Categories=ConsoleOnly;TUI;
+StartupNotify=false
+StartupWMClass=${APP_ID}
+Keywords=${TUI_NAME};tui;terminal;
+EOF
+
+update-desktop-database "$APPS_DIR" 2>/dev/null || true
+
+echo
+echo "  ✓ ${TUI_NAME} installed and registered."
+echo "  It will appear in your app launcher."
+echo
+printf '  Press any key to close...'
+read -n1 -s

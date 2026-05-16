@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+# =============================================================================
+# boki-webapp-install — install a website as a desktop app
+# Creates a .desktop entry in ~/.local/share/applications/
+# =============================================================================
+
+BOKI_USER="$(whoami)"
+BOKI_HOME="/home/${BOKI_USER}"
+APPS_DIR="${BOKI_HOME}/.local/share/applications"
+ICONS_DIR="${APPS_DIR}/icons"
+mkdir -p "$APPS_DIR" "$ICONS_DIR"
+
+echo
+printf '  \e[1m%s\e[0m\n\n' 'arch-boki — Install Web App'
+
+# App name
+read -rp "  App name: " APP_NAME
+[[ -z "$APP_NAME" ]] && { echo "  Cancelled."; exit 0; }
+
+# URL
+read -rp "  URL (e.g. https://app.example.com): " APP_URL
+[[ -z "$APP_URL" ]] && { echo "  Cancelled."; exit 0; }
+
+# Icon — optional path or URL
+read -rp "  Icon path or URL (leave blank to skip): " ICON_INPUT
+
+# Category
+read -rp "  Category (e.g. Network;WebBrowser — leave blank for default): " APP_CATEGORY
+APP_CATEGORY="${APP_CATEGORY:-Network;WebBrowser;}"
+
+# Sanitise name for filename
+APP_FILE="${APP_NAME// /-}"
+APP_FILE="${APP_FILE//[^a-zA-Z0-9_-]/}"
+DESKTOP_FILE="${APPS_DIR}/${APP_FILE}.desktop"
+ICON_PATH="${ICONS_DIR}/${APP_NAME}.png"
+
+# Handle icon
+if [[ -n "$ICON_INPUT" ]]; then
+    if [[ "$ICON_INPUT" =~ ^https?:// ]]; then
+        echo "  Downloading icon..."
+        curl -sL "$ICON_INPUT" -o "$ICON_PATH" 2>/dev/null || ICON_PATH="web-browser"
+    elif [[ -f "$ICON_INPUT" ]]; then
+        cp "$ICON_INPUT" "$ICON_PATH"
+    else
+        ICON_PATH="web-browser"
+    fi
+else
+    ICON_PATH="web-browser"
+fi
+
+# Detect browser
+for _b in firefox chromium brave-browser qutebrowser; do
+    command -v "$_b" &>/dev/null && BROWSER="$_b" && break
+done
+BROWSER="${BROWSER:-xdg-open}"
+
+# Write .desktop file
+cat > "$DESKTOP_FILE" <<EOF
+[Desktop Entry]
+Version=1.0
+Name=${APP_NAME}
+Comment=${APP_NAME}
+Exec=${BROWSER} --app=${APP_URL}
+Terminal=false
+Type=Application
+Icon=${ICON_PATH}
+Categories=${APP_CATEGORY}
+StartupNotify=true
+StartupWMClass=${APP_FILE}
+EOF
+
+update-desktop-database "$APPS_DIR" 2>/dev/null || true
+
+echo
+echo "  ✓ Web app '${APP_NAME}' installed."
+echo "  Desktop file: ${DESKTOP_FILE}"
+echo
+printf '  Press any key to close...'
+read -n1 -s
