@@ -1,0 +1,154 @@
+/* =====================================================
+   omarchy-walker.rasi
+   Mirrors the Omarchy Walker look for rofi.
+
+   USAGE:
+   1. Change the @import below to your active theme
+   2. Run: rofi -show drun -theme ~/.config/rofi/omarchy-walker
+      Or in ~/.config/rofi/config.rasi: @theme "omarchy-walker"
+   ===================================================== */
+
+@import "colors/everforest.rasi"
+
+/* ── Global defaults ─────────────────────────────────
+   All colors come from the imported color file.
+   font matches Walker: monospace 18px (≈ 13pt in rofi)
+   ─────────────────────────────────────────────────── */
+* {
+    font:             "MesloLGS Nerd Font Propo 13";
+    background-color: transparent;
+    text-color:       @text;
+}
+
+/* ── Window ──────────────────────────────────────────
+   BoxWrapper: 644px, padding 20px,
+   alpha(@base, 0.95) bg, 2px solid border, centered
+   ─────────────────────────────────────────────────── */
+window {
+    width:            644px;
+    location:         center;
+    anchor:           center;
+    background-color: @base;
+    border:           2px solid;
+    border-color:     @border-color;
+    border-radius:    0px;
+    padding:          20px;
+    spacing:          0px;
+}
+
+/* ── Main layout ─────────────────────────────────────
+   Vertical stack: search → list → keybinds (spacing 10)
+   ─────────────────────────────────────────────────── */
+mainbox {
+    background-color: transparent;
+    children:         [ inputbar, listview, message ];
+    spacing:          10px;
+    padding:          0px;
+}
+
+/* ── Search bar ──────────────────────────────────────
+   search-container: background @base, padding 10px
+   ─────────────────────────────────────────────────── */
+inputbar {
+    background-color: @keybind-bg;
+    padding:          10px;
+    spacing:          0px;
+    children:         [ entry ];
+    border-radius:    0px;
+}
+
+entry {
+    background-color: transparent;
+    text-color:       @input-text;
+    placeholder:      "Search...";
+    placeholder-color: @placeholder-fg;
+    padding:          0px;
+    border:           0px;
+    border-radius:    0px;
+    cursor:           text;
+}
+
+/* ── List ────────────────────────────────────────────
+   max-content-height 300px, single column, no scrollbar
+   ─────────────────────────────────────────────────── */
+listview {
+    background-color: transparent;
+    padding:          0px;
+    spacing:          0px;
+    scrollbar:        false;
+    max-height:       300px;
+    fixed-height:     false;
+    lines:            8;
+    columns:          1;
+    border:           0px;
+}
+
+/* ── Items ───────────────────────────────────────────
+   padding-left 14px, vertical 14px, icon 32px,
+   icon margin-right 14px, subtext hidden
+   ─────────────────────────────────────────────────── */
+element {
+    background-color: transparent;
+    text-color:       @text;
+    padding:          14px 0px 14px 14px;
+    spacing:          14px;
+    border-radius:    0px;
+    orientation:      horizontal;
+}
+
+element selected {
+    background-color: @sel-bg;
+    text-color:       @sel-text;
+}
+
+element normal.normal,
+element alternate.normal {
+    background-color: transparent;
+    text-color:       @text;
+}
+
+element normal.urgent,
+element alternate.urgent {
+    background-color: transparent;
+    text-color:       @text;
+}
+
+element-icon {
+    size:             32px;
+    background-color: transparent;
+    cursor:           inherit;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    highlight:        none;
+    cursor:           inherit;
+    vertical-align:   0.5;
+}
+
+/* ── Keybind bar ─────────────────────────────────────
+   background @keybind-bg, padding 10px, margin-top 10px
+   ─────────────────────────────────────────────────── */
+message {
+    background-color: @keybind-bg;
+    padding:          10px;
+    margin:           0px;
+    border-radius:    0px;
+    border:           0px;
+}
+
+textbox {
+    background-color: transparent;
+    text-color:       @text;
+    padding:          0px;
+    border:           0px;
+}
+
+/* ── Scrollbar – hidden (Walker: scrollbar { opacity: 0 }) ── */
+scrollbar {
+    background-color: transparent;
+    handle-color:     transparent;
+    border-color:     transparent;
+    width:            0px;
+}
